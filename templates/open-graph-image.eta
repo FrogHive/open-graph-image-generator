@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+
+        html, head, body, div, img { margin: 0; padding: 0;}
+
+        html {
+            width: 1200px;
+            height: 630px;
+        }
+
+        .container {
+            width: 1200px;
+            height: 610px;
+        }
+
+        .main-resource {
+            height: 100%;
+            background-color: #ffffff;
+            overflow: hidden; /* 이미지가 넘칠 경우 숨김 처리 */
+        }
+
+        .description {
+            float: left;
+            padding: 20px 0 0 20px;
+        }
+
+        .title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+    
+        .image {
+            float: right;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            /* margin-top: 20px; */
+        }
+
+        .bottom-space {
+            padding: 10px 0;
+            background-color: <%= it.color %>;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-resource">
+            <div class="description">
+                <div class="title"><%= it.title %></div>
+                <div class="subtitle"><%= it.subTitle %></div>
+            </div>
+            <img class="image" src="<%= it.image %>" alt="Image">
+        </div>
+        <div class="bottom-space"></div>
+    </div>
+</body>
+</html>
+

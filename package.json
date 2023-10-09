@@ -1,0 +1,22 @@
+{
+  "name": "aws-open-graph-image-generator",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "@sparticuz/chromium": "^117.0.0",
+    "aws-sdk": "^2.1472.0",
+    "eta": "^3.1.1",
+    "puppeteer-core": "^21.3.7"
+  },
+  "main": "index.js",
+  "author": "KimDoubleB <tree9295@gmail.com>",
+  "license": "Apache License 2.0",
+  "devDependencies": {
+    "eslint": "^8.51.0",
+    "prettier": "^3.0.3",
+    "serverless-dotenv-plugin": "^6.0.0"
+  },
+  "scripts": {
+    "eslint": "eslint"
+  }
+}

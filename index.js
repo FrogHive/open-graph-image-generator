@@ -16,7 +16,7 @@ async function generateImage(html) {
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
-    headless: chromium.headless,
+    headless: chromium.headless
   });
   const page = await browser.newPage();
   await page.setContent(html, { waitUntil: "networkidle0" });
@@ -27,43 +27,45 @@ async function generateImage(html) {
       x: 0,
       y: 0
     },
-    type: imageExtension,
+    type: imageExtension
   });
 
   await page.close();
   return screenshotBuffer;
- }
+}
 
 function getPost(event) {
   const rawBody = event.isBase64Encoded ? Buffer(event.body, "base64").toString() : event.body;
   const body = JSON.parse(rawBody);
-	console.log("**Request body:", body);
+  console.log("**Request body:", body);
   return {
-    "title": body.title ?? console.error("No Title value was provided"),
-    "subTitle": body.subTitle ?? "",
-    "color": body.color ?? console.error("No Color value was provided"),
-    "image": body.image ?? defaultImage
+    title: body.title ?? console.error("No Title value was provided"),
+    subTitle: body.subTitle ?? "",
+    color: body.color ?? console.error("No Color value was provided"),
+    image: body.image ?? defaultImage
   };
 }
 
 module.exports.handler = async (event) => {
-	// capturing open graph image after rendering
+  // capturing open graph image after rendering
   const post = getPost(event);
   const html = eta.render("./open-graph-image", post);
   const openGraphImage = await generateImage(html);
 
-	// upload image to S3
+  // upload image to S3
   const fileName = `${post.title}_${post.subTitle}_${post.color}.${imageExtension}`;
-  const uploadResult = await s3.upload({
-    Bucket: process.env.BUCKET_NAME,
-    Key: `${openGraphImageDirectory}/${fileName}`,
-    Body: openGraphImage,
-		ContentType: `image/${imageExtension}`
-  }).promise();
+  const uploadResult = await s3
+    .upload({
+      Bucket: process.env.BUCKET_NAME,
+      Key: `${openGraphImageDirectory}/${fileName}`,
+      Body: openGraphImage,
+      ContentType: `image/${imageExtension}`
+    })
+    .promise();
 
   return {
-		statusCode: 200,
-		headers: {"content-type": "application/json"},
-    body: JSON.stringify(uploadResult),
+    statusCode: 200,
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(uploadResult)
   };
 };

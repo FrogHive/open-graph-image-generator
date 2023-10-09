@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/thymeleaf/
+    check-template-location: true
+    suffix: .html
+    mode: HTML
+    cache: false # for dev test
+
+og:
+  image-generator:
+    address: ${OG_IMAEG_GENERATOR_ADDRESS}

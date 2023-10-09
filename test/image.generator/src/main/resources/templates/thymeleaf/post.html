@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Post page</title>
+
+    <!-- open graph section -->
+    <meta content="website" property="og:type">
+    <meta data-th-content="${title}" property="og:title">
+    <meta data-th-content="'Post ' + ${title} + ' of ' + ${category} + ' posts'" property="og:description">
+    <meta data-th-content="${ogImage}" property="og:image">
+    <meta data-th-content="${currentUrl}" property="og:url">
+
+    <!-- for twitter open graph -->
+    <meta data-th-content="${title}" name="twitter:title">
+    <meta data-th-content="'Post ' + ${title} + ' of ' + ${category} + ' posts'" name="twitter:description">
+    <meta content="summary_large_image" name="twitter:card">
+</head>
+<body>
+    <h1 data-th-text="'Post ' + ${title}"></h1>
+    <h3 data-th-text="'sub - ' + ${subTitle}"></h3>
+    <p data-th-text="'Category ' + ${category}"></p>
+</body>
+</html>
